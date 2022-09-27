@@ -86,29 +86,28 @@ void studentDispaly(int id, studentRecord *ptr, int length) {
 
 int main()
 {
-    cout<<"Hello World"<<endl;
     cout<<"Program to add or display student details"<<endl;
     studentRecord stuRecord[5];
     int option;
     int length = 0;
     do {
-        cout<<"Enter the number to perform operation"<<endl;
+        cout<<"Enter the number to perform operation"<<endl;//Getting option from user to perform action
         cout<<"1.Add a student detail 2.Display all student details 3.Enter student id to display specific student detail 4.Quit"<<endl;
         
         cin>>option;
         switch(option) {
             case 1:
-                addRecord(stuRecord);
+                addRecord(stuRecord);//Adding student details
                 length++;
                 break;
             case 2:
-                display(length, stuRecord);
+                display(length, stuRecord);//Display all student details
                 break;
             case 3:
                 int id;
-                cout<<"Enter student id"<<endl;
+                cout<<"Enter student id"<<endl;//Getting specific student id from user
                 cin>>id;
-                studentDispaly(id, stuRecord, length);
+                studentDispaly(id, stuRecord, length);//Displaying specific student detail
                 break;
             case 4:
                 exit(0);
