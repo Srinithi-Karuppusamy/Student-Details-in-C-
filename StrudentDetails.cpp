@@ -1,25 +1,28 @@
 #include <iostream>
 #include<string.h>
+#include<map>
+#include "studentRecord.h"
 
 using namespace std;
 
-typedef struct {
-    struct studentNames{
-        string firstName;
-        string lastName;
-    }studentName;
-    int id;
-    int age;
-    struct studentGrades{
-        int programGrade;
-        int quizGrade;
-        int finalExam;
-        float GPA;
-        char courseGrade;
-     }studentGrade;
-}studentRecord;
+// typedef struct {
+//     struct studentNames{
+//         string firstName;
+//         string lastName;
+//     }studentName;
+//     int id;
+//     int age;
+//     struct studentGrades{
+//         int programGrade;
+//         int quizGrade;
+//         int finalExam;
+//         float GPA;
+//         Grade courseGrade;
+//      }studentGrade;
+// }studentRecord;
     
 void addRecord(studentRecord *stuRecord) {
+        int grade;
         cout<<"Enter id"<<endl;
         cin>>stuRecord->id;
         cout<<"Enter age"<<endl;
@@ -37,7 +40,22 @@ void addRecord(studentRecord *stuRecord) {
         cout<<"Enter cgpa"<<endl;
         cin>>stuRecord->studentGrade.GPA;
         cout<<"Enter course grade"<<endl;
-        cin>>stuRecord->studentGrade.courseGrade;
+        
+        // cin >> grade;
+        // stuRecord->studentGrade.courseGrade = static_cast<Grade>(grade); //To give integer value as input for enum
+        
+        std::map<std::string,Grade> m; //To give enum value itself as a input
+        m["A"] = A;
+        m["B"] = B;
+        m["C"] = C;
+        m["D"] = D;
+        m["E"] = E;
+        m["F"] = F;
+        std::string stugrades;
+        cin >> stugrades;
+        Grade statusn = m[stugrades];
+        stuRecord->studentGrade.courseGrade = statusn;
+        
 }
 
 void display(int len, studentRecord *ptr) {
@@ -54,7 +72,7 @@ void display(int len, studentRecord *ptr) {
 		cout<<"Final Exam :"<<ptr[i].studentGrade.finalExam<<endl;
 		cout<<"Quiz Grade :"<<ptr[i].studentGrade.quizGrade<<endl;
 		cout<<"GPA :"<<ptr[i].studentGrade.GPA<<endl;
-		cout<<"Course Grade"<<ptr[i].studentGrade.courseGrade<<endl;
+		cout<<"Course Grade : "<<ptr[i].studentGrade.courseGrade<<endl;
     }
 }
 
@@ -86,28 +104,29 @@ void studentDispaly(int id, studentRecord *ptr, int length) {
 
 int main()
 {
+    cout<<"Hello World"<<endl;
     cout<<"Program to add or display student details"<<endl;
     studentRecord stuRecord[5];
     int option;
     int length = 0;
     do {
-        cout<<"Enter the number to perform operation"<<endl;//Getting option from user to perform action
+        cout<<"Enter the number to perform operation"<<endl;
         cout<<"1.Add a student detail 2.Display all student details 3.Enter student id to display specific student detail 4.Quit"<<endl;
         
         cin>>option;
         switch(option) {
             case 1:
-                addRecord(stuRecord);//Adding student details
+                addRecord(stuRecord);
                 length++;
                 break;
             case 2:
-                display(length, stuRecord);//Display all student details
+                display(length, stuRecord);
                 break;
             case 3:
                 int id;
-                cout<<"Enter student id"<<endl;//Getting specific student id from user
+                cout<<"Enter student id"<<endl;
                 cin>>id;
-                studentDispaly(id, stuRecord, length);//Displaying specific student detail
+                studentDispaly(id, stuRecord, length);
                 break;
             case 4:
                 exit(0);
